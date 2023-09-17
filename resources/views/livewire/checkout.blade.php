@@ -1,4 +1,4 @@
-<div class="bg-tertiary-900">
+<div class="bg-tertiary-900" x-data="checkout()">
     <div class="fixed top-0 left-0 hidden w-1/2 h-full lg:block bg-tertiary-900" aria-hidden="true"></div>
     <div class="fixed top-0 right-0 hidden w-1/2 h-full lg:block bg-tertiary-800" aria-hidden="true"></div>
 
@@ -57,8 +57,11 @@
 
                     @if ($step === CheckoutStepsEnum::INFORMATION->value)
                         <x-checkout.information-form />
+                    @elseif ($step === CheckoutStepsEnum::SHIPPING->value)
+                        <x-checkout.shipping-form :user="$user" :address="$address" />
+                    @elseif ($step === CheckoutStepsEnum::PAYMENT->value)
+                        <x-checkout.payment-form :user="$user" :address="$address" />
                     @endif
-
                 </div>
 
             </div>
